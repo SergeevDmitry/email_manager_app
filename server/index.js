@@ -26,6 +26,8 @@ app.get(
   })
 );
 
+app.get('/auth/google/callback', passport.authenticate('google'));
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(5000);
