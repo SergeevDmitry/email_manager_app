@@ -7,13 +7,22 @@ const app = express();
 
 // https://console.developers.google.com/
 passport.use(
-  new GoogleStrategy({
-    clientID: keys.googleClientID,
-    clientSecret: keys.googleClientSecret,
-    callbackURL: '/auth/google/callback'
-  },
-  accessToken => {
-    console.log(accessToken);
+  new GoogleStrategy(
+    {
+      clientID: keys.googleClientID,
+      clientSecret: keys.googleClientSecret,
+      callbackURL: '/auth/google/callback'
+    },
+    accessToken => {
+      console.log(accessToken);
+    }
+  )
+);
+
+app.get(
+  '/auth/google',
+  passport.authenticate('google', {
+    scope: ['profile', 'email']
   })
 );
 
